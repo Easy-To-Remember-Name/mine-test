@@ -1,0 +1,1 @@
+g++ src/main.cpp src/Terrain/Cube.cpp src/Terrain/World/World.cpp src/Terrain/Terrain.cpp src/Shaders/Shader.cpp src/TextureLoader/TextureLoader.cpp include/libs/SimplexNoise.cpp include/libs/glad.c -Iinclude -lglfw -ldl -lGL -o triangle && echo "compiled" || echo && ./triangle
