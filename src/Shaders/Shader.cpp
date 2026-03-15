@@ -11,7 +11,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath){
     std::stringstream vStream, fStream;
 
     if(!vFile.is_open() || !fFile.is_open()){
-        std::cerr << "Failed to open shader files\n";
+        std::cerr << "Failed to open shader files: " << vertexPath << " and " << fragmentPath << "\n";
     }
 
     vStream << vFile.rdbuf();
@@ -30,7 +30,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath){
     glGetShaderiv(vertex,GL_COMPILE_STATUS,&success);
     if(!success){
         glGetShaderInfoLog(vertex,512,nullptr,infoLog);
-        std::cout << "Vertex Shader Error: " << infoLog << std::endl;
+        std::cout << "Vertex Shader Error (" << vertexPath << "): " << infoLog << std::endl;
     }
 
     // Compile fragment shader
@@ -40,7 +40,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath){
     glGetShaderiv(fragment,GL_COMPILE_STATUS,&success);
     if(!success){
         glGetShaderInfoLog(fragment,512,nullptr,infoLog);
-        std::cout << "Fragment Shader Error: " << infoLog << std::endl;
+        std::cout << "Fragment Shader Error (" << fragmentPath << "): " << infoLog << std::endl;
     }
 
     // Link program
@@ -51,7 +51,7 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath){
     glGetProgramiv(ID,GL_LINK_STATUS,&success);
     if(!success){
         glGetProgramInfoLog(ID,512,nullptr,infoLog);
-        std::cout << "Shader Linking Error: " << infoLog << std::endl;
+        std::cout << "Shader Linking Error (" << vertexPath << ", " << fragmentPath << "): " << infoLog << std::endl;
     }
 
     glDeleteShader(vertex);

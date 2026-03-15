@@ -247,6 +247,7 @@ int main() {
     shader.setInt("soilTexture",2);   // Texture unit 2 (was soilTexture, now dirtTexture)
     shader.setInt("snowTexture",3);   // Texture unit 3
     shader.setFloat("gamma",0.7f);
+    shader.setFloat("maxHeight", World::MAX_HEIGHT);
 
     // ==== Enhanced World System ====
     World world;
