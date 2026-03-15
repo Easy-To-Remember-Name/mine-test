@@ -63,10 +63,42 @@ namespace Cube {
                 break;
         }
 
-        appendVertex(vertices, quad[0], heightValue, 0.0f, 1.0f);
-        appendVertex(vertices, quad[1], heightValue, 1.0f, 1.0f);
-        appendVertex(vertices, quad[2], heightValue, 1.0f, 0.0f);
-        appendVertex(vertices, quad[3], heightValue, 0.0f, 0.0f);
+        float uMin = 0.0f;
+        float uMax = 1.0f;
+        float vMin = 0.0f;
+        float vMax = 1.0f;
+
+        switch (face) {
+            case FRONT:
+                uMin = 0.0f;  uMax = 0.25f;
+                vMin = 0.0f;  vMax = 0.25f;
+                break;
+            case BACK:
+                uMin = 0.25f; uMax = 0.5f;
+                vMin = 0.0f;  vMax = 0.25f;
+                break;
+            case LEFT:
+                uMin = 0.5f;  uMax = 0.75f;
+                vMin = 0.0f;  vMax = 0.25f;
+                break;
+            case RIGHT:
+                uMin = 0.75f; uMax = 1.0f;
+                vMin = 0.0f;  vMax = 0.25f;
+                break;
+            case TOP:
+                uMin = 0.0f;  uMax = 0.25f;
+                vMin = 0.25f; vMax = 0.5f;
+                break;
+            case BOTTOM:
+                uMin = 0.25f; uMax = 0.5f;
+                vMin = 0.25f; vMax = 0.5f;
+                break;
+        }
+
+        appendVertex(vertices, quad[0], heightValue, uMin, vMax);
+        appendVertex(vertices, quad[1], heightValue, uMax, vMax);
+        appendVertex(vertices, quad[2], heightValue, uMax, vMin);
+        appendVertex(vertices, quad[3], heightValue, uMin, vMin);
 
         indices.push_back(indexOffset + 0);
         indices.push_back(indexOffset + 1);
